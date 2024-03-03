@@ -1,0 +1,59 @@
+sudo xbps-install -S void-repo-nonfree
+sudo xbps-install -S void-repo-multilib
+sudo xbps-install -S void-repo-multilib-nonfree
+sudo xbps-install -S chrony
+sudo xbps-install -S doas
+sudo xbps-install -S opendoas
+sudo xbps-install -S nvim
+sudo xbps-install -S neovim
+sudo xbps-install -S xarchiver zip unzip xz tar
+sudo xbps-install -S vsv
+sudo xbps-install -S vlc
+doas xbps-install -S zoxide ripgrep exa
+doas xbps-install -S atuin
+doas xbps-install -S neofetch btop
+doas xbps-install -S zramen
+doas xbps-install -S plank
+doas xbps-install -S tlp tlpui tlp-rdw
+doas xbps-install -S make
+doas xbps-install -S bluez blueman
+doas xbps-install -S pkgtop
+doas xbps-install -S xfce4-whiskermenu-plugin
+doas xbps-install -S openbox
+doas xbps-install -S alacritty
+doas xbps-install -S net-tools
+doas xbps-install -S cava musikcube
+doas xbps-install -S git gitui
+doas xbps-install -S llvm
+doas xbps-install -S clang clang-tools-extra
+doas xbps-install -S emacs
+doas xbps-install -S nitrogen
+doas xbps-install -S redshift redshift-gtk
+doas xbps-install -S geoclue2
+doas xbps-install -S obconf
+doas xbps-install -S nix
+doas xbps-install -S fuzzypkg jq
+doas xbps-install -S mpv
+sudo xbps-install -S libX11-devel libXft-devel libXinerama-devel
+sudo xbps-install -S freetype-devel fontconfig-devel
+doas xbps-install -S pkg-config
+doas xbps-install -S gcc
+doas xbps-install -S fd findutils
+doas xbps-install -S cmake
+doas xbps-install -S libtool
+doas xbps-install -S black pyright
+doas xbps-install -S libvirt virt-manager qemu
+doas xbps-install -S conky
+doas xbps-install -S patch
+doas xbps-install -S picom tmux
+doas xbps-install -S thermald preload
+doas xbps-install -S timeshift
+doas xbps-install -S gparted
+doas xbps-install -S tilix
+doas xbps-install -S ueberzug
+doas xbps-install -S mugshot
+doas xbps-install -S emptty
+doas xbps-install -S figlet toilet
+
+
+

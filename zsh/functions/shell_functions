@@ -1,0 +1,133 @@
+# Collection of small shell functions
+# Source this inside the config file of a POSIX-compliant shell
+
+# Simple note taker
+note () {
+    NOTES="${XDG_DATA_HOME:-$HOME/.local/share}/notes"
+    #if file doesn't exist, create it
+    [ -f "$NOTES" ] || touch "$NOTES"
+
+    #no arguments, print file
+    if [ $# = 0 ]
+        then
+            cat "$NOTES"
+    #clear file
+    elif [ "$1" = -c ]
+        then
+            > "$NOTES"
+    #add all arguments to file
+    else
+        echo "$@" >> "$NOTES"
+    fi
+}
+
+# Back Up a file. Usage "bu filename.txt"
+bu () { 
+    cp $1 ${1}-`date +%Y%m%d%H%M`.backup ;
+}
+
+# rsync as cp and mv alternative
+rcp () {
+    rsync --archive -hh --partial --info=stats1,progress2 \
+        --modify-window=1 "$@"
+}
+
+rmv () {
+    rsync --archive -hh --partial --info=stats1,progress2 \
+        --modify-window=1 --remove-source-files "$@"
+}
+
+# Convert decimal to hexadecimal
+dec2hex () {
+    printf "0x%02x\n" "$1"
+}
+
+# Convert hexadecimal to decimal
+hex2dec () {
+    printf "%d\n" "0x$1"
+}
+
+# Convert wav to flac
+wav2flac () {
+    for file in ./*.wav; do
+        ffmpeg -i "$file" "${file%.wav}.flac"
+    done
+}
+
+# Convert flac to mp3 320k
+flac2mp3 () {
+    for file in ./*.flac; do
+        ffmpeg -i "$file" -acodec libmp3lame -ab 320k "${file%.flac}.mp3"
+    done
+}
+
+# Convert flac to opus 160k
+flac2opus () {
+    for file in ./*.flac; do
+        ffmpeg -i "$file" -acodec libopus -ab 160k "${file%.flac}.opus"
+    done
+}
+
+# Calculate the crc32 checksum of a file. Use rhash if it's installed
+# If it isn't, use the much slower coreutils approach
+# https://stackoverflow.com/a/49446525
+crc32sum () {
+    if [ -x "$(command -v rhash)" ]; then
+        rhash --simple "$1"
+    else
+        gzip -1 -c "$1" | tail -c8 | od -t x4 -N 4 -A n
+    fi
+}
+
+# Generate a random 16 chars string and send it to the clipboard
+randomname () {
+    (tr -dc 'a-z0-9_-' </dev/urandom | head -c 16) 2>/dev/null | \
+        xclip -selection clipboard
+}
+
+# Search for file contents with fzf
+fgrep() {
+    selected="$(grep --color=always -InRi "$*" |
+        fzf --ansi --color "hl:-1:underline,hl+:-1:underline:reverse")"
+    if [ -n "$selected" ]; then
+        filename=${selected%%:*}; selected=${selected#*:}
+        linenumber=${selected%%:*}
+        # remove linenumber if your editor can't start from a given line
+        "$EDITOR" "$filename" "+$linenumber"
+    fi
+}
+
+# Upload local or remote files to the null pointer
+# Usage: upload /path/to/file/or/url expiretime
+upload() {
+
+    # A file or URL is mandatory
+    [ -z "$1" ] && return 1
+
+    # The custom expire time must be an integer. Defaults to 24h if empty
+    if [ -z "$2" ]; then
+        expiretime="24"
+    else
+        case "$2" in
+            ''|*[!0-9]*) return 1 ;;
+            *) expiretime="$2" ;;
+        esac
+    fi
+
+    tmp_file="$(mktemp)"
+    if [ -f "$1" ] || [ "$1" = "-" ]; then
+        curl -F"file=@$1" -Fexpires="$expiretime" --dump-header "$tmp_file" https://0x0.st
+
+    elif printf "%s\n" "$1" | grep -qE "^https?://.*"; then
+        curl -F"url=$1" -Fexpires="$expiretime" --dump-header "$tmp_file" https://0x0.st
+
+    elif [ -d "$1" ]; then
+        printf "%s\n" "$1 is a directory."
+
+    else
+        printf "%s\n" "$1: no such file"
+    fi
+
+    grep -e x-expires -e x-token "$tmp_file"
+    rm -f "$tmp_file"
+}
