@@ -54,6 +54,10 @@ doas xbps-install -S ueberzug
 doas xbps-install -S mugshot
 doas xbps-install -S emptty
 doas xbps-install -S figlet toilet
-
-
-
+(bit, vlc, swingmusic)
+doas xbps-install -S alacritty
+doas xbps-install -S htop glances ncmpcpp mpd obmenu-generator
+doas xbps-install -S midori
+doas xbps-install -S xrdb
+doas xbps-install -S libXft-devel libX11-devel harfbuzz-devel libXext-devel libXrender-devel libXinerama-devel gd-devel(st)
+doas xbps-install -S waydroid
