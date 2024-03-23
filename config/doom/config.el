@@ -32,15 +32,18 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
 
+(add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
+;;(setq doom-theme 'doom-gruvbox)
+;;(setq doom-gruvbox-dark-variant "hard")
+(setq doom-theme 'xresources)
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/.local/org/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -76,5 +79,17 @@
 ;; they are implemented.
 
 (setq +format-with-lsp nil)
-(setq fancy-splash-image (concat doom-private-dir "misc/blackhole-lines.svg"))
+(setq fancy-splash-image (concat doom-user-dir "misc/blackhole-lines.svg"))
 (setq display-line-numbers-type 'relative)
+(setq confirm-kill-emacs nil)
+
+;;indent
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+(add-hook 'text-mode-hook 'highlight-indent-guides-mode)
+(setq highlight-indent-guides-method 'character)
+(setq highlight-indent-guides-character ?┆)
+(require 'highlight-indent-guides)
+(setq highlight-indent-guides-auto-enabled nil)
+(set-face-background 'highlight-indent-guides-odd-face "darkgray")
+(set-face-background 'highlight-indent-guides-even-face "dimgray")
+(set-face-foreground 'highlight-indent-guides-character-face "dimgray")
