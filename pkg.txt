@@ -61,3 +61,22 @@ doas xbps-install -S midori
 doas xbps-install -S xrdb
 doas xbps-install -S libXft-devel libX11-devel harfbuzz-devel libXext-devel libXrender-devel libXinerama-devel gd-devel(st)
 doas xbps-install -S waydroid
+doas xbps-install obmenu-generator
+doas xbps-install -S 7zip
+doas xbps-install -S emacs-gtk3
+doas xbps-install -S xfce4-docklike-plugin
+doas xbps-install -S feh onefetch
+doas xbps-install -S liberation-fonts-ttf
+doas xbps-install -S gtypist
+doas xbps-install -S ModemManager
+doas xbps-install -S easytag
+doas xbps-install -S noto-fonts-cjkss
+
+
+
+
+
+
+
+
+
