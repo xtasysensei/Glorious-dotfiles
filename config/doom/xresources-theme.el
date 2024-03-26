@@ -70,7 +70,7 @@
    `(highlight ((t (:foreground "orange" :weight bold ,background nil))))
    `(success ((t (:foreground ,green :weight bold))))
    `(warning ((t (:foreground ,red :weight bold))))
-
+   
    ;; compilation
    `(compilation-column-face ((t (:foreground ,yellow))))
    `(compilation-enter-directory-face ((t (:foreground ,green))))
@@ -165,7 +165,7 @@
 
    ;; company-mode
    `(company-tooltip ((t (:foreground ,foreground :background ,background))))
-   `(company-tooltip-selection ((t (:foreground ,background :background ,foreground))))
+   `(company-tooltip-selection ((t (:foreground , magenta :weight bold :underline t))))
    `(company-tooltip-mouse ((t (:background ,background))))
    `(company-tooltip-common ((t (:foreground ,green))))
    `(company-tooltip-common-selection ((t (:foreground ,green))))
@@ -444,7 +444,7 @@
    `(org-mode-line-clock-overrun ((t (:foreground ,background :background ,red))))
    `(org-ellipsis ((t (:foreground ,yellow :underline t))))
    `(org-footnote ((t (:foreground ,cyan :underline t))))
-
+   `(org-code ((t (:foreground ,yellow))))
    ;; outline
    `(outline-1 ((t (:foreground ,red))))
    `(outline-2 ((t (:foreground ,green))))
