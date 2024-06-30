@@ -73,7 +73,7 @@ doas xbps-install -S easytag
 doas xbps-install -S noto-fonts-cjkss
 doas xbps-install -S pipx
 doas xbps-install -S fortune-mod cowsay conky
-doas xbps-install -S docker ruff lazydocker
+doas xbps-install -S docker ruff lazydocker python3-devel base-devel
 
 
 
