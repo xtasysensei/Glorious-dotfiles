@@ -74,9 +74,10 @@ doas xbps-install -S noto-fonts-cjkss
 doas xbps-install -S pipx
 doas xbps-install -S fortune-mod cowsay conky
 doas xbps-install -S docker ruff lazydocker python3-devel base-devel
-
-
-
+doas xbps-install -S golang postgresql docker-compose
+doas xbps-install -S lapce wget gopls golangci-lint
+doas xbps-install -S inetutils bind-utils
+doas xbps-install -S postgresql-client postgresql-contrib postgresql
 
 
 

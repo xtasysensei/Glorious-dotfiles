@@ -24,6 +24,7 @@
 ;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 ;;
+(setq doom-font (font-spec :family "CaskaydiaCove Nerd Font Mono" :size 13))
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
@@ -34,16 +35,20 @@
 ;; `load-theme' function. This is the default:
 
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
-;;(setq doom-theme 'doom-gruvbox)
-;;(setq doom-gruvbox-dark-variant "hard")
-(setq doom-theme 'xresources)
+(setq doom-theme 'doom-gruvbox)
+(setq doom-gruvbox-dark-variant "hard")
+
+;;doom-font (font-spec :family " Nerd Font" :size 12 :weight 'medium))
+;;(setq doom-theme 'xresources)
+;;(after! doom-themes
+;;  (load-theme 'doom-nano-dark t))
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/.local/org/")
+(setq org-directory "~/Documents/org/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -93,3 +98,24 @@
 (set-face-background 'highlight-indent-guides-odd-face "darkgray")
 (set-face-background 'highlight-indent-guides-even-face "dimgray")
 (set-face-foreground 'highlight-indent-guides-character-face "dimgray")
+
+;;cpu
+(setq native-comp-async-jobs-number 1)
+(setq doom-incremental-packages nil)
+
+;;go imports
+(setq gofmt-command "goimports")
+(add-hook 'before-save-hook 'gofmt-before-save)
+
+;;inlay hints
+(after! eglot
+  (add-to-list 'eglot-server-programs
+               '((go-mode go-ts-mode) .
+                 ("gopls" :initializationOptions
+                  (:hints (:parameterNames t
+                           :rangeVariableTypes t
+                           :functionTypeParameters t
+                           :assignVariableTypes t
+                           :compositeLiteralFields t
+                           :compositeLiteralTypes t
+                           :constantValues t))))))
